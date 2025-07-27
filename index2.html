@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let humanScore = 0;
+        let computerScore = 0;
+        for(let i = 0; i<5; i++){
+            const humanSelection = getHumanChoice();
+            const computerSelection = getComputerChoice();
+            let result = playRound(humanSelection, computerSelection);
+            console.log(`Round ${i + 1}: ${result}`);
+        }
+        if(humanScore > computerScore){
+            console.log("The Winner takes it all!");
+        }
+        else if(computerScore > humanScore){
+            console.log("Loser has to fall!");
+        }
+        else{
+            console.log("tie");
+        }
+
+        /*rock & scissor => rock
+        rock & paper => paper
+        scissor & paper => scissor
+        */
+        function playRound(humanSelection, computerSelection){
+            let hs = humanSelection;
+            let cs = computerSelection;
+            if(hs === cs){
+                return "Tie";
+            }
+            else if(hs === "rock"){
+                if(cs==="scissor"){
+                    humanScore++;
+                    return "You win! Rock beats Scissor";
+                }
+                else{//cs => paper
+                    computerScore++;
+                    return "You lose! Paper beats Rock";
+                }
+            }
+            else if(hs === "scissor"){
+                if(cs==="paper"){
+                    humanScore++;
+                    return "You win! Scissor beats Paper";
+                }
+                else{//cs => rock
+                    computerScore++;
+                    return "You lose! Rock beats Scissor";
+                }
+            }
+            else{//hs => paper
+                if(cs==="rock"){
+                    humanScore++;
+                    return "You win! Paper beats Rock";
+                }
+                else{//cs => scissor
+                    computerScore++;
+                    return "You lose! Scissor beats Paper";
+                }
+            }
+        }
+        
+
+        function getComputerChoice(){
+            let cnum = Math.random();
+            if(cnum < 0.33){
+                return "rock";
+            }
+            else if(cnum < 0.66){
+                return "paper";
+            }
+            else{
+                return "scissor";
+            }
+        }
+
+        function getHumanChoice(){
+            let humanChoice = prompt("Enter choice:");
+            return humanChoice.toLowerCase();
+        }
+    </script>
+</body>
+</html>
